@@ -1,0 +1,85 @@
+Namn <- "Viet Tien Trinh"
+LiuId <- "vietr933"
+
+
+
+#Uppgift 1
+#Skapa en function hi_name() med argument namn.
+hi_name <- function(namn){
+  a <- "Hi" 
+  c <- "Keep coding!"
+  #Slå ihop alla variabler samtidigt avstånd mellan variabler och tecken !.
+  cat(paste0(a,sep=" ", namn, sep = "! ", c))
+}
+
+
+
+
+#Uppgift 2
+#Skapa function approx() med argument N.
+approx_e <- function(N){
+  #Skapa en variabel sum och låt sum lika med 0.
+  sum = 0
+  #Skapa en loop med variabel i och låt i kör från 0 till N, inom loop skapa x 
+  #med formel som nedan efter det beräkna sum som nedan.
+  for (i in 0:N) {
+    x = 1/factorial(i)
+    sum = sum + x
+  }
+  return(sum)
+}
+
+
+
+
+#Uppgift 3
+#Skapa 2 variabler Apple_path och google_path som peka till 2 data som nedan.
+Apple_path <- "C:/Users/timce/OneDrive/Dokument/downloadfile/AppleTest.csv"
+google_path <- "C:/Users/timce/OneDrive/Dokument/downloadfile/google2.csv"
+#Skapa en function fast_stock_analysis() med två argument file_path och period_length.
+fast_stock_analysis <- function(file_path, period_length){
+  #läsa in data
+  data <- read.csv(file_path)
+  #Skapa 3 variabler max, min och sum.
+  max = data[[4]][1]            
+  min = data[[5]][1]
+  sum = 0
+  #Skapa en loop med variabel i och låt i kör från 1 till period_length
+  for (i in 1:period_length){
+    #Sök största värder. 
+    if(max < data[[4]][i]){
+      max = data[[4]][i] 
+    }
+    #Sök minsta värder.
+    if(min > data[[5]][i]){
+      min = data[[5]][i]
+    }
+    #Skapa en variabel x och beräkna sum som nedan.
+    x = data[[6]][i]
+    sum = sum + x
+    #Skapa 2 variabler slutpris_förstdagen och slutpris_slutdagen.
+    slutpris_förstdagen = data[[6]][period_length]
+    slutpris_slutdagen = data[[6]][1]
+    #Skapa 2 variabler först_dagen och slut_dagen 
+    först_dagen = data[[2]][period_length]
+    slut_dagen = data[[2]][1]
+  }
+  #Skapa en variabel List som är en list av 4 variabler "total_spridning, medel_slutpris,
+  #slutpris_upp och datum som nedan.  
+  List = list(total_spridning = max - min,
+              medel_slutpris = sum / period_length,
+              slutpris_upp = if(slutpris_förstdagen < slutpris_slutdagen){
+                TRUE
+                }else{
+                  FALSE
+                  },
+              datum = c(först_dagen, slut_dagen))
+  #Utdata variabel List.
+  return(List)
+}
+
+
+library(markmyassignment)
+set_assignment("https://raw.githubusercontent.com/STIMALiU/KursRprgm2/main/Labs/Tests/d1.yml")
+show_tasks()
+mark_my_assignment()
